@@ -1,9 +1,10 @@
 from django.db import reset_queries
+from django.db.models import Count
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response 
 from rest_framework import serializers, status
 from .models import Job, Skill
-from .serializers import SkillSerializer, JobSerializer, JobOnlyReadSerializer
+from .serializers import SkillSerializer, SkillReadSerializer, JobSerializer, JobOnlyReadSerializer
 from rest_framework.viewsets import ModelViewSet
 
 class CreateSkill(CreateAPIView):
@@ -48,4 +49,10 @@ class RetrieveJob(RetrieveAPIView):
         if pk:
             return Job.objects.get(id = pk)
 
+class Skills(ListAPIView): 
+    """Shows how many jobs each skill appears in"""
+    serializer_class = SkillReadSerializer
+    
+    def get_queryset(self):
+        return Skill.objects.all().annotate(num_job=Count('job'))
     

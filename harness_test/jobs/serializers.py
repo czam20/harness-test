@@ -12,7 +12,19 @@ class SkillSerializer(ModelSerializer):
         return {
             'name': instance.name
         }
+
+class SkillReadSerializer(ModelSerializer):
+    """ Skill Model Serializer """
+    class Meta:
+        model = Skill
+        fields = '__all__'
         
+    def to_representation(self, instance):
+        return {
+            'name': instance.name,
+            'count': instance.num_job
+        }
+
 class JobOnlyReadSerializer(ModelSerializer):
     """ Job Model Serializer """
     skills = SkillSerializer(many=True, read_only=True)

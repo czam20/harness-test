@@ -6,4 +6,5 @@ urlpatterns = [
     path('create', CreateJob.as_view(), name='create_job'),
     path('<int:pk>', ListJob.as_view(), name='retrieve_job'),
     path('skills/', CreateSkill.as_view(), name='create_skill'),
+    path('skills/m', Skills.as_view(), name='skills'),
 ]
