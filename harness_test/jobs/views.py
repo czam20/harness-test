@@ -47,7 +47,7 @@ class RetrieveJob(RetrieveAPIView):
     
     def get_queryset(self, pk=None):
         if pk:
-            return Job.objects.get(id = pk)
+            return Job.objects.get(id = 1)
 
 class Skills(ListAPIView): 
     """Shows how many jobs each skill appears in"""
