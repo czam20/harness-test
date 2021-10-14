@@ -37,17 +37,12 @@ class CreateJob(CreateAPIView):
 class ListJob(ListAPIView):
     """ Handle the jobs list """
     serializer_class = JobOnlyReadSerializer
-    
-    def get_queryset(self):
-        return Job.objects.all()
+    queryset = Job.objects.all()
     
 class RetrieveJob(RetrieveAPIView):
     """ Retrieve a job"""
     serializer_class = JobOnlyReadSerializer
-    
-    def get_queryset(self, pk=None):
-        if pk:
-            return Job.objects.get(id = 1)
+    queryset = Job.objects.all()
 
 class Skills(ListAPIView): 
     """Shows how many jobs each skill appears in"""
